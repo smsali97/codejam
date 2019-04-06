@@ -25,22 +25,16 @@ for t in range(1, T + 1):
     #         print(path[a][b],end=' ')
     #     print()
 
-    # SESSEEEEEESSSS
-
-    source = (0,0,'')
+    i, j = 0, 0
     my_path = []
-    frontier = [source]
-    visited = set()
-
-    prev = {}
+    frontier = [(i,j,'')]
 
     while not len(frontier) is 0:
-        curr = frontier.pop()
-        visited.add(curr)
-        r, c, d = curr
+        r, c, d = frontier.pop()
+        my_path.append(d)
         if r == N - 1 and c == N -1:
             break
-        print(r,c,end=' ')
+        
         neighbors = []
         if not r + 1 == N and not path[r+1][c] == (r,c):
             neighbors.append((r+1,c,south))
@@ -48,12 +42,7 @@ for t in range(1, T + 1):
             neighbors.append((r,c+1,east))
 
         for neighbor in neighbors:
-            if not neighbor in visited:
-                frontier.append(neighbor)
-                prev[curr] = neighbor
+            frontier.append(neighbor)
     
-    while curr is not source:
-        t = prev[curr]
-        my_path.insert(0,t[2])
-        curr = t
+
     print("Case #{}: {}".format(t,''.join(my_path)))
